@@ -173,7 +173,7 @@
 	top: 0;
 }
 .search_bar form button:hover{
-    background: #00bba6;
+    background: blue;
     color: #fff;
 }
 .header_links ul li:last-child a {
@@ -754,17 +754,6 @@
 }
 .owl-carousel .owl-item .product_thumb img {
 	width: inherit;
-    transition: .3s;
-	width: 200%; /* Chiều rộng cố định cho hình ảnh */
-    height: 200px; /* Chiều cao cố định cho hình ảnh */
-    object-fit: cover; /* Giữ tỉ lệ hình ảnh và cắt ảnh cho vừa khung */
-    display: block; /* Loại bỏ khoảng trống dưới hình ảnh */
-    margin: 10px; /* Khoảng cách giữa các hình ảnh */
-    border-radius: 8px; /* Bo tròn góc của hình ảnh */
-
-}
-.product_thumb img {
-	
 }
 .product_thumb::before {
 	position: absolute;
@@ -781,7 +770,6 @@
 .single_product:hover .product_thumb::before {
 	opacity: 0.2;
 }
-
 .product_active.owl-carousel .img_icone img {
 	width: inherit;
 }
@@ -866,7 +854,6 @@
 .single_product:hover .product_info{
     opacity: 1;
     visibility: visible;
-	
 }
 .product_info ul li a:hover{
     background: #009483;
@@ -876,20 +863,9 @@
 .single_product {
 	border: 1px solid transparent;
 	padding: 8px;
-	
-}
-.single_product img {
-	width: 100%; /* Đặt chiều rộng đầy đủ */
-    max-width: 300px; /* Chiều rộng tối đa của hình ảnh */
-    height: auto; /* Giữ tỉ lệ khung hình của hình ảnh */
-    display: block; /* Giúp loại bỏ khoảng trống dưới hình ảnh */
-    margin: 0 auto; /* Canh giữa hình ảnh */
-    border-radius: 10px; /* Bo tròn góc của hình ảnh */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Thêm bóng cho hình ảnh */
-    object-fit: cover;
 }
 .single_product:hover{
-    border: 1px solid #ffffff;
+    border: 1px solid #009483;
 }
 .product_active.owl-carousel .owl-nav div, .brand_active.owl-carousel .owl-nav div, .single_p_active.owl-carousel .owl-nav div {
 	font-size: 20px;
@@ -3168,12 +3144,6 @@
 	padding: 20px 20px 13px;
 	border: 1px solid #ededed;
 	margin-bottom: 30px;
-    padding: 10px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    
 }
 .blog_thumb {
 	margin-bottom: 20px;
@@ -3182,13 +3152,6 @@
 .blog_thumb img{
     -webkit-transition: .3s;
     transition: .3s;
-	width: 200%; /* Chiều rộng cố định cho hình ảnh */
-    height: 200px; /* Chiều cao cố định cho hình ảnh */
-    object-fit: cover; /* Giữ tỉ lệ hình ảnh và cắt ảnh cho vừa khung */
-    display: block; /* Loại bỏ khoảng trống dưới hình ảnh */
-    margin: 10px; /* Khoảng cách giữa các hình ảnh */
-    border-radius: 8px; /* Bo tròn góc của hình ảnh */
-
 }
 .single_blog:hover .blog_thumb img{
     -webkit-transform: scale(1.1);
