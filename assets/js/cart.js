@@ -1,88 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Giỏ hàng đơn giản</title>
-  <style>
-    .product {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 10px;
-      width: 200px;
-    }
-
-    .cart {
-      margin-top: 20px;
-    }
-
-    .cart-item {
-      border-bottom: 1px solid #ccc;
-      padding: 10px 0;
-    }
-
-    button {
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="shopping_cart">
-    <a href="#">
-      <i class="fa fa-shopping-cart"></i> <span id="cart-count">0</span> Items - <span id="cart-total">$0.00</span>
-      <i class="fa fa-angle-down"></i>
-    </a>
-    <div class="cart">
-      <h2>Your Cart</h2>
-      <ul id="cart-items"></ul>
-    </div>
-  </div>
-  <div class="shop_tab_product">
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade" id="large" role="tabpanel">
-        <div class="row">
-          <div class="col-lg-4 col-md-6">
-            <div class="single_product">
-              <div class="product_thumb">
-                <a href="single-product.html">
-                  <img src="assets/img/product/thepthanhvan.jpg" alt="" />
-                </a>
-                <div class="product_action">
-                  <button onclick="addToCart(this)">
-                    <i class="fa fa-shopping-cart"></i> Add to cart
-                  </button>
-                </div>
-              </div>
-              <div class="product_content">
-                <span class="product_price">$60.00</span>
-                <h3 class="product_title">
-                  <a href="single-product.html">Thép Thanh Vằn</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-   
-  
-<!-- Khu vực hiển thị giỏ hàng -->
-
-
- 
-
-
-  <script>
- let cart = JSON.parse(localStorage.getItem('cart')) || []; // Lấy giỏ hàng từ Local Storage hoặc tạo giỏ hàng mới
+let cart = JSON.parse(localStorage.getItem('cart')) || []; // Lấy giỏ hàng từ Local Storage hoặc tạo giỏ hàng mới
 
 function addToCart(button) {
   // Lấy thẻ cha chứa thông tin sản phẩm
   const productElement = button.closest('.single_product');
+ 
   
   // Lấy thông tin sản phẩm
   const imageElement = productElement.querySelector('.product_thumb img');
@@ -122,7 +43,7 @@ function renderCart() {
       <img src="${product.image}" alt="${product.name}" width="50" />
       <span>${product.name}</span>
       <span>${product.price}</span>
-      <button onclick="removeFromCart(${index})">Remove</button>
+      <button onclick="removeFromCart(${index})" >Remove</button>
     `;
     cartItems.appendChild(cartItem);
 
@@ -150,8 +71,38 @@ function removeFromCart(index) {
 // Hiển thị giỏ hàng khi tải lại trang
 document.addEventListener('DOMContentLoaded', renderCart);
 
-  </script>
 
-</body>
 
-</html>
+
+
+// function renderCart() {
+//   const cartItems = document.getElementById('cart-items');
+//   cartItems.innerHTML = ''; // Xóa nội dung cũ
+
+//   // Duyệt qua danh sách giỏ hàng và hiển thị
+//   cart.forEach((product, index) => {
+//     const cartItem = document.createElement('li');
+//     cartItem.innerHTML = `
+//       <img src="${product.image}" alt="${product.name}" width="50" />
+//       <span>${product.name}</span>
+//       <span>${product.price} VND</span>
+//       <button onclick="removeFromCart(${index})">Remove</button>
+//     `;
+//     cartItems.appendChild(cartItem);
+//   });
+// }
+
+function removeFromCart(index) {
+  // Xóa sản phẩm khỏi giỏ hàng theo chỉ số
+  cart.splice(index, 1);
+
+  // Cập nhật lại giỏ hàng trong Local Storage
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // Cập nhật lại giỏ hàng hiển thị
+  renderCart();
+}
+
+// Khi trang được tải, hiển thị giỏ hàng từ Local Storage
+document.addEventListener('DOMContentLoaded', renderCart);
+
