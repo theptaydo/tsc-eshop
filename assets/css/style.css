@@ -187,7 +187,7 @@
 	position: relative;
 }
 .shopping_cart > a {
-	font-size: 13px;
+	font-size: 20px;
 	padding: 0 15px;
 	display: block;
 }
@@ -795,6 +795,10 @@
 	top: 0;
 	right: 0;
 }
+html {
+    scroll-behavior: smooth;
+}
+
 .product_action {
 	position: absolute;
 	bottom: -15%;

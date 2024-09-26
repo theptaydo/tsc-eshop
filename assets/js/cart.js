@@ -1,6 +1,7 @@
-let cart = JSON.parse(localStorage.getItem('cart')) || []; // Lấy giỏ hàng từ Local Storage hoặc tạo giỏ hàng mới
+
 
 function addToCart(button) {
+  
   // Lấy thẻ cha chứa thông tin sản phẩm
   const productElement = button.closest('.single_product');
  
@@ -10,22 +11,43 @@ function addToCart(button) {
   const imageSrc = imageElement.src;
   const productName = productElement.querySelector('.product_title a').textContent;
   const productPrice = productElement.querySelector('.product_price').textContent;
+  const productId = productElement.querySelector('.product_id').textContent;
+
+
+
+
 
   // Tạo đối tượng sản phẩm
   const product = {
+    id: productId,
     name: productName,
     image: imageSrc,
     price: productPrice
   };
+  
 
+  let cart = JSON.parse(localStorage.getItem('cart')) || []; // Lấy giỏ hàng từ Local Storage hoặc tạo giỏ hàng mới
+  if (cart === null) {
+    cart = [];
+  }
+  let productIndex = cart.findIndex(product => product.name === productName);
+    if (productIndex !== -1) {
+      // Sản phẩm đã có trong giỏ hàng, hiển thị thông báo
+      alert('Đã có sản phẩm này trong giỏ hàng!');
+      return;
+    } else {
   // Thêm sản phẩm vào giỏ hàng
   cart.push(product);
+  
 
   // Lưu giỏ hàng vào Local Storage
   localStorage.setItem('cart', JSON.stringify(cart));
+  
+    
 
   // Cập nhật giỏ hàng trên giao diện
   renderCart();
+}
 }
 
 function renderCart() {
@@ -56,6 +78,7 @@ function removeFromCart(index) {
 
 // Hiển thị giỏ hàng khi tải lại trang
 document.addEventListener('DOMContentLoaded', renderCart);
+
 
 
 // Hàm đổ dữ liệu từ giỏ hàng qua cart
@@ -159,3 +182,30 @@ function removeFromCart(index) {
 // Khi trang được tải, hiển thị giỏ hàng từ Local Storage
 document.addEventListener('DOMContentLoaded', renderCart);
 
+function addToProductList(button) {
+  // Lấy thẻ cha chứa thông tin sản phẩm
+  const productElement = button.closest('.product_list_item');
+ 
+ 
+  // Lấy thông tin sản phẩm
+  const imageElement = productElement.querySelector('.product_thumb img');
+  const imageSrc = imageElement.src;
+  const productName = productElement.querySelector('.product_title a').textContent;
+  const productPrice = productElement.querySelector('.product_price').textContent;
+
+  // Tạo đối tượng sản phẩm
+  const product = {
+    name: productName,
+    image: imageSrc,
+    price: productPrice
+  };
+
+  // Thêm sản phẩm vào giỏ hàng
+  cart.push(product);
+
+  // Lưu giỏ hàng vào Local Storage
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // Cập nhật giỏ hàng trên giao diện
+  renderCart();
+}
