@@ -38,11 +38,25 @@ const productSchema = new mongoose.Schema({
     type: String,
   },
   // Đánh giá sản phẩm
-  ratings: {
-    type: Number,
-    min: 0,
-    max: 5
-  },
+  ratings: [{
+    fullname: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String,
+      required: true
+    },
+    star: {
+      type: Number,
+      max: 5,
+      min: 0
+    }
+  }],
   createdAt: {
     type: Date,
     default: Date.now
