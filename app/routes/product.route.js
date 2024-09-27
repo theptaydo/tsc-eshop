@@ -13,4 +13,5 @@ module.exports = function (app, axios) {
   app.get("/api/v1/products", controller.getAllProducts);
   app.post("/api/v1/products", controller.saveProduct);
   app.get("/api/v1/product", controller.getProductById);
+  app.patch("/api/v1/product", controller.updateProductById);
 };
