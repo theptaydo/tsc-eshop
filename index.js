@@ -82,6 +82,7 @@ app.get('/', (req, res) => {
 
 require("./app/routes/product.route")(app);
 require("./app/routes/order.route")(app);
+require("./app/routes/rating.route")(app);
 
 //Thay vì sử dụng app.listen, sử dụng server.listen để sử dụng cùng một cổng cho cả express app và Socket.IO:
 server.listen(PORT, () => {
