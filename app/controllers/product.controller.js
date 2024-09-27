@@ -60,7 +60,9 @@ exports.updateProductById = async (req, res) => {
     const productData = req.body;
     const products = await Product.findById(productData._id);
 
-    if (products.length != 0) {
+    console.log(products);
+
+    if (products) {
       // Tạo một sản phẩm mới từ dữ liệu client
       const newProduct = new Product(productData);
 
