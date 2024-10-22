@@ -11,4 +11,5 @@ module.exports = function (app, axios) {
   });
 
   app.post("/api/v1/user", authJwt.isAdmin, controller.saveUser);
+  app.patch("/api/v1/user", authJwt.isAdmin, controller.updateUser);  //api/v1/user
 };

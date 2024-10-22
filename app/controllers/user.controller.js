@@ -55,23 +55,31 @@ exports.saveUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     // Lấy dữ liệu từ client gửi lên
-    const productData = req.body;
-    const products = await Product.findById(productData._id);
+    const email = req.body;
+    const password = req.body;
+    const user = await User.findOne(email);
 
-    console.log(products);
+    console.log(user);
 
-    if (products) {
-      // Tạo một sản phẩm mới từ dữ liệu client
-      const newProduct = new Product(productData);
+    if (user) {
+      if (password)
+        user.password = password;
+      if (email)
+        user.email = email;
+      if (username)
+        user.username = username;
 
-      const updatedProduct = await Product.updateOne({ _id: productData._id }, { $set: newProduct });
-
-      return res.json(newProduct);
+      return res.status(200).json({
+        status: 0,
+        action: "Success",
+        message: "Đã cập nhật",
+        user: user
+      });
     }
     return res.status(201).json({
       status: 0,
       action: "Failed",
-      message: "sản phẩm không tồn tại",
+      message: "user không tồn tại",
     });
 
   } catch (error) {
