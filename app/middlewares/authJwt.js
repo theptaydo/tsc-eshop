@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const config = require("../config/auth.config.js");
+const config = require("../config/security.config");
 const db = require("../models");
 const Users = require("../models/user.model");
 
@@ -27,27 +27,33 @@ verifyToken = async (req, res, next) => {
 };
 
 isAdmin = (req, res, next) => {
-  const tokenBearer = req.header('Authorization');
-  let token = tokenBearer.substring(7);
+  try {
+    const tokenBearer = req.header('Authorization');
+    let token = tokenBearer.substring(7);
 
-  if (!token) {
-    return res.status(403).send({ message: "No token provided!" });
-  }
-  jwt.verify(token,
-    config.secret,
-    (err, decoded) => {
-      if (err) {
-        return res.status(403).send({
-          message: "Forbidden!",
-        });
-      }
-      console.log(decoded)
-      if (!decoded.roles.includes('ADMIN'))
-        return res.status(403).send({
-          message: "Forbidden!",
-        });
-      next();
+    if (!token) {
+      return res.status(403).send({ message: "No token provided!" });
+    }
+
+    jwt.verify(token,
+      config.SECRET,
+      (err, decoded) => {
+        if (err) {
+          return res.status(403).send({
+            message: "Forbidden!",
+          });
+        }
+        if (!decoded.roles.includes('ADMIN'))
+          return res.status(403).send({
+            message: "Forbidden!",
+          });
+        next();
+      });
+  } catch (error) {
+    return res.status(403).send({
+      message: "Forbidden! & catch",
     });
+  }
 };
 
 isModerator = (req, res, next) => {

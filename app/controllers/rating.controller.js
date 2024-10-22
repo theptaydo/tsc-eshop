@@ -35,7 +35,7 @@ exports.saveRatingByProductById = async (req, res) => {
 
       return res.json(cloneProduct);
     }
-    return res.status(201).json({
+    return res.status(404).json({
       status: 0,
       action: "Failed",
       message: "sản phẩm không tồn tại",

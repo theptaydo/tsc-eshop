@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const securityConfig = require('../config/security.config');
 
 const userSchema = new mongoose.Schema({
   _id: {
@@ -6,6 +8,10 @@ const userSchema = new mongoose.Schema({
     default: mongoose.Types.ObjectId, // Đảm bảo sử dụng một giá trị mặc định
   },
   email: {
+    type: String,
+    required: true
+  },
+  photo: {
     type: String,
     required: true
   },
@@ -29,8 +35,12 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
+  address: {
+    type: String,
+    default: true
+  },
   role: {
-    type: Array,
+    type: [String], // Đảm bảo đây là một mảng chuỗi
     enum: ['ADMIN', 'MODERATOR', 'OWNER'],
     default: 'MODERATOR'
   },
@@ -42,6 +52,15 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
+});
+
+// Mã hóa mật khẩu trước khi lưu
+userSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    const saltRounds = securityConfig.SALT;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
+  next();
 });
 
 

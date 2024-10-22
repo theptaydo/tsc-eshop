@@ -37,10 +37,10 @@ const mongodbURI = process.env.MONGODB_URI;
 /*----------------------------------------------*/
 /**--------------------- DB CONNECTIONS -------------------------*/
 // Kiểm tra giá trị của các biến môi trường
-console.log('REDIS_PASSWORD:', redisPassword);
-console.log('REDIS_HOST:', redisHost);
-console.log('REDIS_PORT:', redisPort);
-console.log('MONGODB_URI:', mongodbURI);
+// console.log('REDIS_PASSWORD:', redisPassword);
+// console.log('REDIS_HOST:', redisHost);
+// console.log('REDIS_PORT:', redisPort);
+// console.log('MONGODB_URI:', mongodbURI);
 
 
 const connectionStatus = {
@@ -64,7 +64,7 @@ db.mongoose
   })
   .then(() => {
     connectionStatus.mongoDB = true;
-    console.log("Successfully connect to MongoDB." + mongodbURI);
+    console.log("Successfully connect to MongoDB.");
   })
   .catch(err => {
     console.error("Connection error", err);
@@ -83,6 +83,8 @@ app.get('/', (req, res) => {
 require("./app/routes/product.route")(app);
 require("./app/routes/order.route")(app);
 require("./app/routes/rating.route")(app);
+require("./app/routes/user.route")(app);
+require("./app/routes/auth.route")(app);
 
 //Thay vì sử dụng app.listen, sử dụng server.listen để sử dụng cùng một cổng cho cả express app và Socket.IO:
 server.listen(PORT, () => {
