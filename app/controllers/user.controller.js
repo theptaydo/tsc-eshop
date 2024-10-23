@@ -2,9 +2,9 @@ const User = require("../models/user.model");
 
 exports.getUsers = async (req, res) => {
   try {
-    const products = await Product.find();
+    const users = await User.find();
 
-    return res.json(products);
+    return res.json(users);
   } catch (error) {
     res.status(500).json({
       message: error?.message || error,
@@ -14,10 +14,10 @@ exports.getUsers = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    const productId = req.query.id;
-    const products = await Product.findById(productId);
+    const username = req.query.username;
+    const user = await User.findById(username);
 
-    return res.json(products);
+    return res.json(user);
   } catch (error) {
     res.status(500).json({
       message: error?.message || error,

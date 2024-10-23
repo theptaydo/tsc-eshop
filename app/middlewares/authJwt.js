@@ -12,7 +12,7 @@ verifyToken = async (req, res, next) => {
   }
 
   jwt.verify(token,
-    config.secret,
+    config.SECRET,
     (err, decoded) => {
       if (err) {
         return res.status(401).send({
@@ -64,7 +64,7 @@ isModerator = (req, res, next) => {
     return res.status(403).send({ message: "No token provided!" });
   }
   jwt.verify(token,
-    config.secret,
+    config.SECRET,
     (err, decoded) => {
       if (err) {
         return res.status(403).send({
