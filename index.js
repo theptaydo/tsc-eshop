@@ -10,6 +10,8 @@ var dotent = require('dotenv');
 var getIP = require('ipware')().get_ip;
 const axios = require('axios');
 const path = require('path');
+const multer = require('multer');
+const fileparse = require('./util/fileparse');  // Import fileparse.js
 
 const app = express();
 const server = http.createServer(app); // Tạo server từ express app
@@ -86,6 +88,22 @@ require("./app/routes/rating.route")(app);
 require("./app/routes/user.route")(app);
 require("./app/routes/auth.route")(app);
 require("./app/routes/post.route")(app);
+
+
+
+//============== FILE
+// Cấu hình multer để lưu file tải lên vào thư mục "uploads"
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');  // Thư mục lưu file
+  },
+  filename: function (req, file, cb) {
+    // Đặt tên file là ngày giờ hiện tại + tên gốc của file
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
 
 //Thay vì sử dụng app.listen, sử dụng server.listen để sử dụng cùng một cổng cho cả express app và Socket.IO:
 server.listen(PORT, () => {
