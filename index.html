@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Post</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+      padding: 10px;
+    }
+
+    input,
+    textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h2>Submit New Post</h2>
+    <label for="token">Enter your Token</label>
+    <input type="text" id="token" placeholder="Enter token..." required>
+
+    <label for="title">Title</label>
+    <input type="text" id="title" placeholder="Enter title..." required>
+
+    <label for="description">Description</label>
+    <textarea id="description" rows="4" placeholder="Enter description..." required></textarea>
+
+    <label for="content">Content</label>
+    <textarea id="content" rows="4" placeholder="Enter content..." required></textarea>
+
+    <label for="banner">Banner URL</label>
+    <input type="text" id="banner" placeholder="Enter banner URL..." required>
+
+    <label for="createByUser">Created By (User)</label>
+    <input type="text" id="createByUser" placeholder="Enter username..." required>
+
+    <label for="category">Category (Comma-separated)</label>
+    <input type="text" id="category" placeholder="Enter categories...">
+
+    <label for="status">Status (true/false)</label>
+    <input type="text" id="status" placeholder="Enter status..." required>
+
+    <button type="button" onclick="submitPost()">Submit</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    async function submitPost() {
+      const token = document.getElementById('token').value;
+      const title = document.getElementById('title').value;
+      const description = document.getElementById('description').value;
+      const content = document.getElementById('content').value;
+      const banner = document.getElementById('banner').value;
+      const createByUser = document.getElementById('createByUser').value;
+      const category = document.getElementById('category').value.split(',').map(item => item.trim());
+      const status = document.getElementById('status').value.toLowerCase() === 'true';
+
+      const data = {
+        title,
+        description,
+        content,
+        banner,
+        createByUser,
+        category,
+        status,
+      };
+
+      try {
+        const response = await fetch('http://localhost:5152/api/v1/post', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          document.getElementById('result').innerText = 'Post submitted successfully!';
+        } else {
+          document.getElementById('result').innerText = `Error: ${result.message}`;
+        }
+      } catch (error) {
+        document.getElementById('result').innerText = `Error: ${error.message}`;
+      }
+    }
+  </script>
+</body>
+
+</html>

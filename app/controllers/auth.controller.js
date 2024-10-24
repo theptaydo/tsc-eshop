@@ -30,10 +30,10 @@ exports.signin = async (req, res) => {
           email: user?.email,
           picture: user?.photo,
           role: user?.role,
-          token: jwt.sign({ email: user?.email, roles: user?.role }, config.SECRET, {
+          token: jwt.sign({ username: user?.username, roles: user?.role }, config.SECRET, {
             expiresIn: "1d",
           }),
-          refreshToken: jwt.sign({ email: user?.email, roles: user?.role }, config.SECRET, {
+          refreshToken: jwt.sign({ username: user?.username, roles: user?.role }, config.SECRET, {
             expiresIn: "7d",
           }),
         },

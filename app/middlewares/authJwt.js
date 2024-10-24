@@ -47,6 +47,8 @@ isAdmin = (req, res, next) => {
           return res.status(403).send({
             message: "Forbidden!",
           });
+        req.username = decoded.username;
+        req.roles = decoded.roles;
         next();
       });
   } catch (error) {
@@ -76,6 +78,8 @@ isModerator = (req, res, next) => {
         return res.status(403).send({
           message: "Forbidden!",
         });
+      req.username = decoded.username;
+      req.roles = decoded.roles;
       next();
     });
 };
