@@ -27,7 +27,7 @@ app.set('trust proxy', true); // Enable proxy trust
 
 //---------- CONFIG SERVER  ---------------------
 // set port, listen for requests
-const PORT = process.env.PORT || 5152;
+const PORT = process.env.PORT || 3000;
 const redisPassword = process.env.REDIS_PASSWORD;
 const redisHost = process.env.REDIS_HOST;
 const redisPort = process.env.REDIS_PORT;
