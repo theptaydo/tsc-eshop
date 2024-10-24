@@ -8,7 +8,7 @@ const db = require("./app/models");
 var dotent = require('dotenv');
 const path = require('path');
 const multer = require('multer');
-const fileparse = require('./util/fileparse');  // Import fileparse.js
+const fileparse = require('./app/utils/fileparse');  // Import fileparse.js
 
 const app = express();
 const server = http.createServer(app); // Tạo server từ express app
