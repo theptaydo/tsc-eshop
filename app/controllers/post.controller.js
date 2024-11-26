@@ -2,8 +2,8 @@ const Post = require("../models/post.model");
 
 exports.getPosts = async (req, res) => {
   try {
-    // Lấy tất cả dữ liệu từ request body
-    const posts = await Post.find();
+    // Sắp xếp index giảm dần và createdAt giảm dần
+    const posts = await Post.find().sort({ index: -1, createdAt: -1 });
 
     return res.json(posts);
 

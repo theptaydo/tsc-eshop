@@ -10,7 +10,7 @@ module.exports = function (app, axios) {
     next();
   });
 
-  app.get("/api/v1/posts", authJwt.verifyToken, controller.getPosts);
+  app.get("/api/v1/posts", controller.getPosts);
   app.get("/api/v1/post", controller.getPost);  //?id=65ffty655
   app.post("/api/v1/post", authJwt.verifyToken, controller.savePost);
   // app.patch("/api/v1/user", authJwt.isAdmin, controller.updateUser);  //api/v1/user
